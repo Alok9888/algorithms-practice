@@ -8,11 +8,11 @@ class Solution {
         for(int num : nums){
             if(candidate1 == num) count1++;
             else if(candidate2 == num) count2++;
-            else if(count1 == 0 && num != candidate2){
+            else if(count1 == 0){
                 candidate1 = num; 
                 count1 = 1;
             }
-            else if(count2 == 0 && num != candidate1){
+            else if(count2 == 0){
                 candidate2 = num; 
                 count2 = 1;
             }
