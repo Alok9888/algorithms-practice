@@ -8,17 +8,15 @@ class Solution {
         int limit = k;
         while(r < n){
             while(l < r && (k==0 && nums[r] == 0)){
-                if(nums[l] == 0){
-                    if(k < limit){
-                        k++;
-                    }
+                if(nums[l] == 0 && k < limit){
+                    k++;
                 }
                 l++;
             }
 
             // NEW: after shrinking, if we are still stuck on a bad 0
-            if(k == 0 && nums[r] == 0){
-                l = r + 1; // skip this 0 completely
+            if(l==r && nums[r] == 0 && k==0){
+                l++; // skip this 0 completely
                 r++;
                 continue; // don't do k--, don't update maxLen
             }
