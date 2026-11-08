@@ -17,7 +17,10 @@ class Solution {
                 if(ch[l] == maxFreqChar){
                     maxFreq = 0;
                     for(int i=0; i<26; i++){
-                        maxFreq = Math.max(maxFreq, freq[i]);
+                        if(maxFreq <= freq[i]){
+                            maxFreq = freq[i];
+                            maxFreqChar = ch[i];
+                        }
                     }
                 }
                 l++;
