@@ -12,7 +12,7 @@ class Solution {
                 ans++;
             }
             else{
-                endIndex = intervals[i][1] > intervals[i-1][1] ? intervals[i][1] : intervals[i-1][1];
+                endIndex = intervals[i][1];
             }
         }
         return ans;
