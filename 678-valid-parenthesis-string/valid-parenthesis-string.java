@@ -30,6 +30,6 @@ class Solution {
                 return false;
             }
         }
-        return openPos.isEmpty();
+        return true;
     }
 }
