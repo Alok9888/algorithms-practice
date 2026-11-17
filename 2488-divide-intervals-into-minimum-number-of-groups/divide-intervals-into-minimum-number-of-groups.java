@@ -7,7 +7,7 @@ class Solution {
         for(int i=1; i<n; i++){
             if(!minHeap.isEmpty() && minHeap.peek() < intervals[i][0]){
                 int topOfMinHeap = minHeap.poll();
-                minHeap.offer(Math.max(topOfMinHeap, intervals[i][1]));
+                minHeap.offer(intervals[i][1]);
             }else{
                 minHeap.offer(intervals[i][1]);
             }
