@@ -1,32 +1,17 @@
 class Solution {
-
     public int minGroups(int[][] intervals) {
-        List<int[]> events = new ArrayList<>();
-
-        for (int[] interval : intervals) {
-            events.add(new int[] { interval[0], 1 }); 
-            events.add(new int[] { interval[1] + 1, -1 }); 
-        }
-
-        Collections.sort(events, (a, b) -> {
-            if (a[0] == b[0]) {
-                return Integer.compare(a[1], b[1]); 
-            } else {
-                return Integer.compare(a[0], b[0]); 
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        int n = intervals.length;
+        Arrays.sort(intervals, Comparator.comparingInt((int[] a) -> (a[0])));
+        minHeap.offer(intervals[0][1]);
+        for(int i=1; i<n; i++){
+            if(!minHeap.isEmpty() && minHeap.peek() < intervals[i][0]){
+                int topOfMinHeap = minHeap.poll();
+                minHeap.offer(Math.max(topOfMinHeap, intervals[i][1]));
+            }else{
+                minHeap.offer(intervals[i][1]);
             }
-        });
-
-        int concurrentIntervals = 0;
-        int maxConcurrentIntervals = 0;
-
-        for (int[] event : events) {
-            concurrentIntervals += event[1];
-            maxConcurrentIntervals = Math.max(
-                maxConcurrentIntervals,
-                concurrentIntervals
-            ); 
         }
-
-        return maxConcurrentIntervals;
+        return minHeap.size();
     }
 }
