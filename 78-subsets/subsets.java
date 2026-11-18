@@ -1,22 +1,22 @@
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         int n = nums.length;
-        List<Integer> arr = new ArrayList<>();
-        List<List<Integer>> ans = new ArrayList<>();
-        recurse(nums, arr, ans, 0, n);
-        return ans;
+        Set<List<Integer>> ans = new HashSet<>();
+        List<Integer> curr = new ArrayList<>();
+        recurse(nums, 0, n, ans, curr);
+        return new ArrayList<>(ans);
     }
-
-    private void recurse(int[] nums,List arr, List ans, int i, int n){
-        if(i == n){
-            ans.add(new ArrayList<>(arr));
+    private void recurse(int[] nums, int startIndex, int n, Set<List<Integer>> ans, List<Integer> curr){
+        if(startIndex >= n){
+            ans.add(new ArrayList<>(curr));
             return;
         }
 
-        arr.add(nums[i]);
-        recurse(nums, arr, ans, i+1, n);
-        arr.remove(arr.size()-1);
-        recurse(nums, arr, ans, i+1, n);
+        for(int i=startIndex; i<n; i++){
+            curr.add(nums[i]);
+            recurse(nums, i+1, n, ans, curr);
+            curr.remove(curr.size() - 1);
+            ans.add(new ArrayList<>(curr));
+        }
     }
 }
-
